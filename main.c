@@ -47,9 +47,7 @@ int main()
     int unusedCapacity;
     float utilization;
 
-    printf("================================================\n");
-    printf("     WAREHOUSE BOX PACKAGING OPTIMIZATION\n");
-    printf("================================================\n\n");
+    printf("WAREHOUSE BOX PACKAGING OPTIMIZATION\n");
 
     printf("Enter box capacity (kg): ");
     scanf("%d", &capacity);
@@ -94,13 +92,11 @@ int main()
         }
     }
 
-   
+    /* Sort products from largest to smallest */
     sortDescending(products, n);
 
-    printf("\n================================================\n");
-    printf("          GREEDY PACKING PROCESS\n");
-    printf("================================================\n");
-
+    printf("GREEDY PACKING PROCESS\n");
+   
     printf("\nProducts after sorting by weight:\n");
 
     for (i = 0; i < n; i++)
@@ -113,13 +109,16 @@ int main()
 
     printf("\n\n");
 
-   
+    /*
+       First Fit Decreasing (FFD)
+       Greedy Algorithm
+    */
 
     for (i = 0; i < n; i++)
     {
         placed = 0;
 
-        
+        /* Check existing boxes */
         for (j = 0; j < boxCount; j++)
         {
             if (boxUsed[j] + products[i].weight <= capacity)
@@ -135,7 +134,7 @@ int main()
                        products[i].weight,
                        j + 1);
 
-                printf("        Box %d capacity: %d / %d kg\n\n",
+                printf("Box %d capacity: %d / %d kg\n\n",
                        j + 1,
                        boxUsed[j],
                        capacity);
@@ -145,7 +144,7 @@ int main()
             }
         }
 
-        
+        /* Create a new box */
         if (placed == 0)
         {
             boxes[boxCount][0] = products[i];
@@ -167,11 +166,9 @@ int main()
         }
     }
 
-   
+    /* Display final packaging result */
 
-    printf("================================================\n");
-    printf("              PACKAGING RESULT\n");
-    printf("================================================\n");
+    printf("PACKAGING RESULT\n");
 
     for (i = 0; i < boxCount; i++)
     {
@@ -202,9 +199,8 @@ int main()
     utilization =
         ((float)totalUsed / totalCapacity) * 100;
 
-    printf("\n================================================\n");
-    printf("                 FINAL ANALYSIS\n");
-    printf("================================================\n");
+    printf("\n");
+    printf("FINAL ANALYSIS\n");
 
     printf("Total Products    : %d\n", n);
     printf("Total Boxes Used  : %d\n", boxCount);
@@ -213,7 +209,7 @@ int main()
     printf("Unused Capacity   : %d kg\n", unusedCapacity);
     printf("Space Utilization : %.2f%%\n", utilization);
 
-    printf("================================================\n");
+  
 
     return 0;
 }
